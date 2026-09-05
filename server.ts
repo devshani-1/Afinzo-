@@ -36,6 +36,15 @@ async function startServer() {
   const publicPath = path.join(process.cwd(), 'public');
   app.use(express.static(publicPath));
 
+  // Sitemap & Robots explicit routes for search crawlers
+  app.get('/sitemap.xml', (req, res) => {
+    res.sendFile(path.join(publicPath, 'sitemap.xml'));
+  });
+
+  app.get('/robots.txt', (req, res) => {
+    res.sendFile(path.join(publicPath, 'robots.txt'));
+  });
+
   // Google Search Console verification file endpoint
   app.get('/google7755d2d30b52558b.html', (req, res) => {
     res.type('text/html').send('google-site-verification: google7755d2d30b52558b.html');

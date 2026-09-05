@@ -16,7 +16,8 @@ import {
   Sliders,
   Zap,
   ShieldAlert,
-  ArrowUpRight
+  ArrowUpRight,
+  ChevronDown
 } from 'lucide-react';
 import { SAMPLE_PROFILE_STANDARD, SAMPLE_PROFILE_FAMILY } from '../utils/sampleData';
 import { FinancialFormData } from '../types/financial';
@@ -34,6 +35,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 }) => {
   // State for interactive Price vs Real Cost demo widget on the homepage
   const [activeTab, setActiveTab] = useState<'car' | 'rent' | 'salary'>('car');
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900">
@@ -478,7 +480,81 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* 4. Complete Comprehensive 5-Step Report CTA */}
+      {/* 4. Frequently Asked Questions (SEO Keyword Rich for Google Ranking & SERP Snippets) */}
+      <section id="faq" className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800 mb-3">
+              <HelpCircle className="h-3.5 w-3.5 text-emerald-600" />
+              <span>Answers & Methodology</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
+              Frequently Asked Questions: True Affordability & Cash Flow
+            </h2>
+            <p className="mt-3 text-sm text-slate-600">
+              Clear, practical answers about car financing, rent limits, and monthly cash flow budgeting.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "How do I know if I can actually afford a new car payment?",
+                a: "A car is only truly affordable when you account for the entire monthly package: amortized loan financing, added comprehensive insurance, fuel or EV charging, routine maintenance, and registration fees. Financial best practices suggest your total monthly vehicle costs should never exceed 10% to 15% of your net monthly take-home pay. Affinzo automatically calculates these amortized numbers and tests whether you still maintain a safe monthly buffer."
+              },
+              {
+                q: "How much of my take-home pay should go to rent or housing?",
+                a: "As a rule of thumb, total housing expenses (rent, tenant insurance, and utilities) should remain under 30% of your net after-tax take-home pay. Going over 35% puts you into 'house poor' territory, which severely restricts your ability to save, invest, travel, or handle unexpected emergency expenses."
+              },
+              {
+                q: "What is the 50/30/20 rule and how does Affinzo use it?",
+                a: "The 50/30/20 budget framework allocates 50% of after-tax income to essential needs (housing, food, transport, utilities), 30% to wants (dining, hobbies, subscriptions), and 20% to savings and debt reduction. Affinzo analyzes your existing commitments and dynamically alerts you if a new purchase will push your essential needs over 50%."
+              },
+              {
+                q: "Why is sticker price different from true monthly cost of ownership?",
+                a: "Sticker prices ignore taxes, loan interest over 48–72 months, depreciation, and ongoing upkeep. For example, a $35,000 vehicle with 6.5% APR and $220/month insurance costs over $740/month in cash outflow—costing thousands more than the retail showroom tag. Affinzo reveals this real monthly commitment before you sign a contract."
+              },
+              {
+                q: "Is Affinzo free and does it store my personal banking credentials?",
+                a: "Affinzo is 100% free and client-side private. We never ask for your bank account login, social security number, or Plaid credentials. All affordability calculations run securely in your own browser, and your data stays completely on your device."
+              }
+            ].map((faq, idx) => (
+              <div 
+                key={idx}
+                className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-xs transition-colors"
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-slate-900 hover:text-emerald-700 transition-colors cursor-pointer"
+                >
+                  <span className="pr-4">{faq.q}</span>
+                  <ChevronDown className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-200 ${openFaq === idx ? 'rotate-180 text-emerald-600' : ''}`} />
+                </button>
+                {openFaq === idx && (
+                  <div className="px-5 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+                    <p>{faq.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-xs text-slate-500">
+              Have a custom question or want to simulate your own numbers?{' '}
+              <button 
+                onClick={() => onNavigate('affordability')} 
+                className="font-bold text-emerald-700 hover:underline cursor-pointer"
+              >
+                Launch the Purchase Decision Simulator →
+              </button>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Complete Comprehensive 5-Step Report CTA */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl border border-slate-900 bg-slate-900 p-8 sm:p-12 text-white shadow-xl">

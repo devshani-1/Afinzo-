@@ -1,6 +1,6 @@
 {
   "name": "Affinzo",
-  "description": "Know what things will actually cost you. Affinzo helps you look beyond sticker prices to understand real monthly cash flow and affordability.",
+  "description": "Can I actually afford this? Calculate true monthly costs, take-home pay after progressive taxes, hidden expenses, and cash flow impact for cars, rent, and life.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
