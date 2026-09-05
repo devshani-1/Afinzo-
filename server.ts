@@ -32,6 +32,10 @@ async function startServer() {
     res.json({ status: 'ok', app: 'Affinzo' });
   });
 
+  // Static serve of public folder (favicons, manifests, verification files)
+  const publicPath = path.join(process.cwd(), 'public');
+  app.use(express.static(publicPath));
+
   // Google Search Console verification file endpoint
   app.get('/google7755d2d30b52558b.html', (req, res) => {
     res.type('text/html').send('google-site-verification: google7755d2d30b52558b.html');
