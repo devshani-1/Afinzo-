@@ -32,6 +32,11 @@ async function startServer() {
     res.json({ status: 'ok', app: 'Affinzo' });
   });
 
+  // Google Search Console verification file endpoint
+  app.get('/google7755d2d30b52558b.html', (req, res) => {
+    res.type('text/html').send('google-site-verification: google7755d2d30b52558b.html');
+  });
+
   // Vite middleware for development vs static serve for production
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
